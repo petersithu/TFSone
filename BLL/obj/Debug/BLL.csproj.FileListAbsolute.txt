@@ -1,0 +1,8 @@
+C:\ISS\ADtesting\WebApplication1\BLL\bin\Debug\BLL.dll.config
+C:\ISS\ADtesting\WebApplication1\BLL\bin\Debug\BLL.dll
+C:\ISS\ADtesting\WebApplication1\BLL\bin\Debug\BLL.pdb
+C:\ISS\ADtesting\WebApplication1\BLL\bin\Debug\EntityFramework.dll
+C:\ISS\ADtesting\WebApplication1\BLL\bin\Debug\EntityFramework.xml
+C:\ISS\ADtesting\WebApplication1\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+C:\ISS\ADtesting\WebApplication1\BLL\obj\Debug\BLL.dll
+C:\ISS\ADtesting\WebApplication1\BLL\obj\Debug\BLL.pdb

@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SA40Team07bModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuthorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookCategory">
+    <Key>
+      <PropertyRef Name="BookCategoryID" />
+    </Key>
+    <Property Name="BookCategoryID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookCatetgoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShelfNo" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISBN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookCategoryID" Type="smallint" Nullable="false" />
+    <Property Name="AuthorID" Type="smallint" Nullable="false" />
+    <Property Name="Edition" Type="nvarchar" MaxLength="20" />
+    <Property Name="TotalStock" Type="smallint" Nullable="false" />
+    <Property Name="NumberRented" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IssueTransaction">
+    <Key>
+      <PropertyRef Name="IssueID" />
+    </Key>
+    <Property Name="IssueID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="smallint" Nullable="false" />
+    <Property Name="StaffID" Type="smallint" />
+    <Property Name="BookID" Type="smallint" Nullable="false" />
+    <Property Name="DateIssue" Type="datetime" />
+    <Property Name="DateDue" Type="datetime" />
+    <Property Name="DateReturn" Type="datetime" />
+    <Property Name="IssueStatus" Type="nvarchar" MaxLength="10" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="65" />
+    <Property Name="City" Type="nvarchar" MaxLength="30" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="6" />
+    <Property Name="ContactTitle" Type="nvarchar" MaxLength="5" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="9" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="MCategoryID" Type="smallint" Nullable="false" />
+    <Property Name="BookBorrowed" Type="smallint" />
+    <Property Name="MemberStatus" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="MemberCategory">
+    <Key>
+      <PropertyRef Name="MCategoryID" />
+    </Key>
+    <Property Name="MCategoryID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NoOfBooksAllowed" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StaffAccount">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StaffName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="65" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="6" />
+    <Property Name="ContactTitle" Type="nvarchar" MaxLength="5" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="9" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SA40Team07b.dbo.vm_returnTran' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vm_returnTran">
+    <Key>
+      <PropertyRef Name="IssueID" />
+      <PropertyRef Name="MemberID" />
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="IssueID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="smallint" Nullable="false" />
+    <Property Name="StaffID" Type="smallint" />
+    <Property Name="BookID" Type="smallint" Nullable="false" />
+    <Property Name="DateIssue" Type="datetime" />
+    <Property Name="DateDue" Type="datetime" />
+    <Property Name="DateReturn" Type="datetime" />
+    <Property Name="IssueStatus" Type="nvarchar" MaxLength="10" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SA40Team07b.dbo.VM_SearchBook' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VM_SearchBook">
+    <Key>
+      <PropertyRef Name="BookID" />
+      <PropertyRef Name="BookTitle" />
+      <PropertyRef Name="ISBN" />
+      <PropertyRef Name="AuthorName" />
+      <PropertyRef Name="BookCatetgoryName" />
+      <PropertyRef Name="TotalStock" />
+      <PropertyRef Name="NumberRented" />
+    </Key>
+    <Property Name="BookID" Type="smallint" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ISBN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AuthorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Edition" Type="nvarchar" MaxLength="20" />
+    <Property Name="BookCatetgoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ShelfNo" Type="nvarchar" MaxLength="10" />
+    <Property Name="TotalStock" Type="smallint" Nullable="false" />
+    <Property Name="NumberRented" Type="smallint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SA40Team07b.dbo.VW_Book' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+      <PropertyRef Name="ISBN" />
+      <PropertyRef Name="BookTitle" />
+      <PropertyRef Name="BookCatetgoryName" />
+      <PropertyRef Name="TotalStock" />
+    </Key>
+    <Property Name="BookID" Type="smallint" Nullable="false" />
+    <Property Name="ISBN" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookCatetgoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Edition" Type="nvarchar" MaxLength="20" />
+    <Property Name="TotalStock" Type="smallint" Nullable="false" />
+    <Property Name="Available Stock" Type="smallint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SA40Team07b.dbo.VW_Member' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+      <PropertyRef Name="MemberName" />
+      <PropertyRef Name="MCategoryName" />
+    </Key>
+    <Property Name="MemberID" Type="smallint" Nullable="false" />
+    <Property Name="ContactTitle" Type="nvarchar" MaxLength="5" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="65" />
+    <Property Name="City" Type="nvarchar" MaxLength="30" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="6" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="9" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="MCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MemberStatus" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SA40Team07b.dbo.VW_OutOfStock' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_OutOfStock">
+    <Key>
+      <PropertyRef Name="BookID" />
+      <PropertyRef Name="BookTitle" />
+      <PropertyRef Name="BookCategoryID" />
+    </Key>
+    <Property Name="BookID" Type="smallint" Nullable="false" />
+    <Property Name="BookTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookCategoryID" Type="smallint" Nullable="false" />
+    <Property Name="AvailableDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SA40Team07b.dbo.VW_StaffAccount' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_StaffAccount">
+    <Key>
+      <PropertyRef Name="StaffID" />
+      <PropertyRef Name="StaffName" />
+    </Key>
+    <Property Name="StaffID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactTitle" Type="nvarchar" MaxLength="5" />
+    <Property Name="StaffName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="65" />
+    <Property Name="City" Type="varchar" MaxLength="30" />
+    <Property Name="PostalCode" Type="nvarchar" MaxLength="6" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="9" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="fk_AuthorID">
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BookCategoryID">
+    <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="1" />
+    <End Role="Books" Type="Self.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookCategory">
+        <PropertyRef Name="BookCategoryID" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="BookCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BookID">
+    <End Role="Books" Type="Self.Books" Multiplicity="1" />
+    <End Role="IssueTransaction" Type="Self.IssueTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="IssueTransaction">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cateogryID">
+    <End Role="MemberCategory" Type="Self.MemberCategory" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberCategory">
+        <PropertyRef Name="MCategoryID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="MCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_MemberID">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="IssueTransaction" Type="Self.IssueTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="IssueTransaction">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StaffID">
+    <End Role="StaffAccount" Type="Self.StaffAccount" Multiplicity="0..1" />
+    <End Role="IssueTransaction" Type="Self.IssueTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffAccount">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="IssueTransaction">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="BookIssueTran_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="BookList_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="MemberList_proc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="SA40Team07bModelStoreContainer">
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookCategory" EntityType="Self.BookCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IssueTransaction" EntityType="Self.IssueTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberCategory" EntityType="Self.MemberCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffAccount" EntityType="Self.StaffAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vm_returnTran" EntityType="Self.vm_returnTran" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vm_returnTran].[IssueID] AS [IssueID], 
+    [vm_returnTran].[MemberID] AS [MemberID], 
+    [vm_returnTran].[StaffID] AS [StaffID], 
+    [vm_returnTran].[BookID] AS [BookID], 
+    [vm_returnTran].[DateIssue] AS [DateIssue], 
+    [vm_returnTran].[DateDue] AS [DateDue], 
+    [vm_returnTran].[DateReturn] AS [DateReturn], 
+    [vm_returnTran].[IssueStatus] AS [IssueStatus], 
+    [vm_returnTran].[Remarks] AS [Remarks]
+    FROM [dbo].[vm_returnTran] AS [vm_returnTran]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VM_SearchBook" EntityType="Self.VM_SearchBook" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VM_SearchBook].[BookID] AS [BookID], 
+    [VM_SearchBook].[BookTitle] AS [BookTitle], 
+    [VM_SearchBook].[ISBN] AS [ISBN], 
+    [VM_SearchBook].[AuthorName] AS [AuthorName], 
+    [VM_SearchBook].[Edition] AS [Edition], 
+    [VM_SearchBook].[BookCatetgoryName] AS [BookCatetgoryName], 
+    [VM_SearchBook].[ShelfNo] AS [ShelfNo], 
+    [VM_SearchBook].[TotalStock] AS [TotalStock], 
+    [VM_SearchBook].[NumberRented] AS [NumberRented]
+    FROM [dbo].[VM_SearchBook] AS [VM_SearchBook]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_Book" EntityType="Self.VW_Book" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_Book].[BookID] AS [BookID], 
+    [VW_Book].[ISBN] AS [ISBN], 
+    [VW_Book].[BookTitle] AS [BookTitle], 
+    [VW_Book].[BookCatetgoryName] AS [BookCatetgoryName], 
+    [VW_Book].[Edition] AS [Edition], 
+    [VW_Book].[TotalStock] AS [TotalStock], 
+    [VW_Book].[Available Stock] AS [Available Stock]
+    FROM [dbo].[VW_Book] AS [VW_Book]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_Member" EntityType="Self.VW_Member" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_Member].[MemberID] AS [MemberID], 
+    [VW_Member].[ContactTitle] AS [ContactTitle], 
+    [VW_Member].[MemberName] AS [MemberName], 
+    [VW_Member].[Address] AS [Address], 
+    [VW_Member].[City] AS [City], 
+    [VW_Member].[PostalCode] AS [PostalCode], 
+    [VW_Member].[ContactNumber] AS [ContactNumber], 
+    [VW_Member].[Email] AS [Email], 
+    [VW_Member].[MCategoryName] AS [MCategoryName], 
+    [VW_Member].[MemberStatus] AS [MemberStatus]
+    FROM [dbo].[VW_Member] AS [VW_Member]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_OutOfStock" EntityType="Self.VW_OutOfStock" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_OutOfStock].[BookID] AS [BookID], 
+    [VW_OutOfStock].[BookTitle] AS [BookTitle], 
+    [VW_OutOfStock].[BookCategoryID] AS [BookCategoryID], 
+    [VW_OutOfStock].[AvailableDate] AS [AvailableDate]
+    FROM [dbo].[VW_OutOfStock] AS [VW_OutOfStock]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_StaffAccount" EntityType="Self.VW_StaffAccount" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_StaffAccount].[StaffID] AS [StaffID], 
+    [VW_StaffAccount].[ContactTitle] AS [ContactTitle], 
+    [VW_StaffAccount].[StaffName] AS [StaffName], 
+    [VW_StaffAccount].[Address] AS [Address], 
+    [VW_StaffAccount].[City] AS [City], 
+    [VW_StaffAccount].[PostalCode] AS [PostalCode], 
+    [VW_StaffAccount].[ContactNumber] AS [ContactNumber], 
+    [VW_StaffAccount].[Email] AS [Email]
+    FROM [dbo].[VW_StaffAccount] AS [VW_StaffAccount]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_AuthorID" Association="Self.fk_AuthorID">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BookCategoryID" Association="Self.fk_BookCategoryID">
+      <End Role="BookCategory" EntitySet="BookCategory" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BookID" Association="Self.fk_BookID">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="IssueTransaction" EntitySet="IssueTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cateogryID" Association="Self.fk_cateogryID">
+      <End Role="MemberCategory" EntitySet="MemberCategory" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="fk_MemberID" Association="Self.fk_MemberID">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="IssueTransaction" EntitySet="IssueTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StaffID" Association="Self.fk_StaffID">
+      <End Role="StaffAccount" EntitySet="StaffAccount" />
+      <End Role="IssueTransaction" EntitySet="IssueTransaction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

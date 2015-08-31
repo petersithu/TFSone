@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bbd0722fa4fd43beb6d82f1579d85085" Name="Diagram1">
+        <EntityTypeShape EntityType="SA40Team07bModel.Author" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.BookCategory" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.Book" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.IssueTransaction" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.Member" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.MemberCategory" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.StaffAccount" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.vm_returnTran" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.VM_SearchBook" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.VW_Book" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.VW_Member" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.VW_OutOfStock" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SA40Team07bModel.VW_StaffAccount" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SA40Team07bModel.fk_AuthorID" ManuallyRouted="false" />
+        <AssociationConnector Association="SA40Team07bModel.fk_BookCategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="SA40Team07bModel.fk_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="SA40Team07bModel.fk_MemberID" ManuallyRouted="false" />
+        <AssociationConnector Association="SA40Team07bModel.fk_StaffID" ManuallyRouted="false" />
+        <AssociationConnector Association="SA40Team07bModel.fk_cateogryID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SA40Team07bModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.fk_AuthorID" FromRole="Author" ToRole="Books" />
+  </EntityType>
+  <EntityType Name="BookCategory">
+    <Key>
+      <PropertyRef Name="BookCategoryID" />
+    </Key>
+    <Property Name="BookCategoryID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookCatetgoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShelfNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="Self.fk_BookCategoryID" FromRole="BookCategory" ToRole="Books" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookCategoryID" Type="Int16" Nullable="false" />
+    <Property Name="AuthorID" Type="Int16" Nullable="false" />
+    <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TotalStock" Type="Int16" Nullable="false" />
+    <Property Name="NumberRented" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Author" Relationship="Self.fk_AuthorID" FromRole="Books" ToRole="Author" />
+    <NavigationProperty Name="BookCategory" Relationship="Self.fk_BookCategoryID" FromRole="Books" ToRole="BookCategory" />
+    <NavigationProperty Name="IssueTransactions" Relationship="Self.fk_BookID" FromRole="Books" ToRole="IssueTransaction" />
+  </EntityType>
+  <EntityType Name="IssueTransaction">
+    <Key>
+      <PropertyRef Name="IssueID" />
+    </Key>
+    <Property Name="IssueID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int16" Nullable="false" />
+    <Property Name="StaffID" Type="Int16" />
+    <Property Name="BookID" Type="Int16" Nullable="false" />
+    <Property Name="DateIssue" Type="DateTime" Precision="3" />
+    <Property Name="DateDue" Type="DateTime" Precision="3" />
+    <Property Name="DateReturn" Type="DateTime" Precision="3" />
+    <Property Name="IssueStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.fk_BookID" FromRole="IssueTransaction" ToRole="Books" />
+    <NavigationProperty Name="Member" Relationship="Self.fk_MemberID" FromRole="IssueTransaction" ToRole="Member" />
+    <NavigationProperty Name="StaffAccount" Relationship="Self.fk_StaffID" FromRole="IssueTransaction" ToRole="StaffAccount" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MCategoryID" Type="Int16" Nullable="false" />
+    <Property Name="BookBorrowed" Type="Int16" />
+    <Property Name="MemberStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IssueTransactions" Relationship="Self.fk_MemberID" FromRole="Member" ToRole="IssueTransaction" />
+    <NavigationProperty Name="MemberCategory" Relationship="Self.fk_cateogryID" FromRole="Member" ToRole="MemberCategory" />
+  </EntityType>
+  <EntityType Name="MemberCategory">
+    <Key>
+      <PropertyRef Name="MCategoryID" />
+    </Key>
+    <Property Name="MCategoryID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NoOfBooksAllowed" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Members" Relationship="Self.fk_cateogryID" FromRole="MemberCategory" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="StaffAccount">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="IssueTransactions" Relationship="Self.fk_StaffID" FromRole="StaffAccount" ToRole="IssueTransaction" />
+  </EntityType>
+  <EntityType Name="vm_returnTran">
+    <Key>
+      <PropertyRef Name="IssueID" />
+      <PropertyRef Name="MemberID" />
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="IssueID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int16" Nullable="false" />
+    <Property Name="StaffID" Type="Int16" />
+    <Property Name="BookID" Type="Int16" Nullable="false" />
+    <Property Name="DateIssue" Type="DateTime" Precision="3" />
+    <Property Name="DateDue" Type="DateTime" Precision="3" />
+    <Property Name="DateReturn" Type="DateTime" Precision="3" />
+    <Property Name="IssueStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="VM_SearchBook">
+    <Key>
+      <PropertyRef Name="BookID" />
+      <PropertyRef Name="BookTitle" />
+      <PropertyRef Name="ISBN" />
+      <PropertyRef Name="AuthorName" />
+      <PropertyRef Name="BookCatetgoryName" />
+      <PropertyRef Name="TotalStock" />
+      <PropertyRef Name="NumberRented" />
+    </Key>
+    <Property Name="BookID" Type="Int16" Nullable="false" />
+    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AuthorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="BookCatetgoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ShelfNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="TotalStock" Type="Int16" Nullable="false" />
+    <Property Name="NumberRented" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VW_Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+      <PropertyRef Name="ISBN" />
+      <PropertyRef Name="BookTitle" />
+      <PropertyRef Name="BookCatetgoryName" />
+      <PropertyRef Name="TotalStock" />
+    </Key>
+    <Property Name="BookID" Type="Int16" Nullable="false" />
+    <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookCatetgoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Edition" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TotalStock" Type="Int16" Nullable="false" />
+    <Property Name="Available_Stock" Type="Int16" />
+  </EntityType>
+  <EntityType Name="VW_Member">
+    <Key>
+      <PropertyRef Name="MemberID" />
+      <PropertyRef Name="MemberName" />
+      <PropertyRef Name="MCategoryName" />
+    </Key>
+    <Property Name="MemberID" Type="Int16" Nullable="false" />
+    <Property Name="ContactTitle" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MemberStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="VW_OutOfStock">
+    <Key>
+      <PropertyRef Name="BookID" />
+      <PropertyRef Name="BookTitle" />
+      <PropertyRef Name="BookCategoryID" />
+    </Key>
+    <Property Name="BookID" Type="Int16" Nullable="false" />
+    <Property Name="BookTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookCategoryID" Type="Int16" Nullable="false" />
+    <Property Name="AvailableDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="VW_StaffAccount">
+    <Key>
+      <PropertyRef Name="StaffID" />
+      <PropertyRef Name="StaffName" />
+    </Key>
+    <Property Name="StaffID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactTitle" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="StaffName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="fk_AuthorID">
+    <End Role="Author" Type="Self.Author" Multiplicity="1" />
+    <End Role="Books" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BookCategoryID">
+    <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="1" />
+    <End Role="Books" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookCategory">
+        <PropertyRef Name="BookCategoryID" />
+      </Principal>
+      <Dependent Role="Books">
+        <PropertyRef Name="BookCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BookID">
+    <End Role="Books" Type="Self.Book" Multiplicity="1" />
+    <End Role="IssueTransaction" Type="Self.IssueTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="IssueTransaction">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_MemberID">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="IssueTransaction" Type="Self.IssueTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberID" />
+      </Principal>
+      <Dependent Role="IssueTransaction">
+        <PropertyRef Name="MemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StaffID">
+    <End Role="StaffAccount" Type="Self.StaffAccount" Multiplicity="0..1" />
+    <End Role="IssueTransaction" Type="Self.IssueTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffAccount">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="IssueTransaction">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cateogryID">
+    <End Role="MemberCategory" Type="Self.MemberCategory" Multiplicity="1" />
+    <End Role="Member" Type="Self.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberCategory">
+        <PropertyRef Name="MCategoryID" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="MCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SA40Team07bEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="BookCategories" EntityType="Self.BookCategory" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="IssueTransactions" EntityType="Self.IssueTransaction" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="MemberCategories" EntityType="Self.MemberCategory" />
+    <EntitySet Name="StaffAccounts" EntityType="Self.StaffAccount" />
+    <EntitySet Name="vm_returnTran" EntityType="Self.vm_returnTran" />
+    <EntitySet Name="VM_SearchBook" EntityType="Self.VM_SearchBook" />
+    <EntitySet Name="VW_Book" EntityType="Self.VW_Book" />
+    <EntitySet Name="VW_Member" EntityType="Self.VW_Member" />
+    <EntitySet Name="VW_OutOfStock" EntityType="Self.VW_OutOfStock" />
+    <EntitySet Name="VW_StaffAccount" EntityType="Self.VW_StaffAccount" />
+    <AssociationSet Name="fk_AuthorID" Association="Self.fk_AuthorID">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BookCategoryID" Association="Self.fk_BookCategoryID">
+      <End Role="BookCategory" EntitySet="BookCategories" />
+      <End Role="Books" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BookID" Association="Self.fk_BookID">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="IssueTransaction" EntitySet="IssueTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_MemberID" Association="Self.fk_MemberID">
+      <End Role="Member" EntitySet="Members" />
+      <End Role="IssueTransaction" EntitySet="IssueTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StaffID" Association="Self.fk_StaffID">
+      <End Role="StaffAccount" EntitySet="StaffAccounts" />
+      <End Role="IssueTransaction" EntitySet="IssueTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cateogryID" Association="Self.fk_cateogryID">
+      <End Role="MemberCategory" EntitySet="MemberCategories" />
+      <End Role="Member" EntitySet="Members" />
+    </AssociationSet>
+    <FunctionImport Name="BookIssueTran_proc" ReturnType="Collection(SA40Team07bModel.BookIssueTran_proc_Result)" />
+    <FunctionImport Name="BookList_proc" ReturnType="Collection(SA40Team07bModel.BookList_proc_Result)" />
+    <FunctionImport Name="MemberList_proc" ReturnType="Collection(SA40Team07bModel.MemberList_proc_Result)" />
+  </EntityContainer>
+  <ComplexType Name="BookIssueTran_proc_Result">
+    <Property Type="String" Name="MemberName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="BookTitle" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="BookCatetgoryName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="StaffName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="DateIssue" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DateDue" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="DateReturn" Nullable="true" Precision="23" />
+    <Property Type="String" Name="IssueStatus" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="BookList_proc_Result">
+    <Property Type="String" Name="BookTitle" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ISBN" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="AuthorName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Edition" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BookCatetgoryName" Nullable="false" MaxLength="50" />
+    <Property Type="Int16" Name="TotalStock" Nullable="false" />
+    <Property Type="Int16" Name="Available_Stock" Nullable="true" />
+    <Property Type="String" Name="ShelfNo" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="MemberList_proc_Result">
+    <Property Type="String" Name="Full_Name" Nullable="true" MaxLength="56" />
+    <Property Type="String" Name="MCategoryName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ContactNumber" Nullable="true" MaxLength="9" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>
